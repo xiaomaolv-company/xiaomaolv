@@ -37,11 +37,6 @@ class Home extends Component {
     return (
       <div className="page_home">
         首页
-        <button onClick={this.jump}>跳转</button>
-        <button onClick={this.changeName}>改变姓名</button>
-        <button onClick={this.changeAge}>改变年龄</button>
-        <div>{name}</div>
-        <div>{age}</div>
         <Button>按钮</Button>
       </div>
     );

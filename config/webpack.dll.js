@@ -8,7 +8,7 @@ module.exports = {
   mode: 'production',
   entry: {
     // lodash: ['lodash'],
-    // antdMobile: ['antd-mobile'],
+    antdMobile: ['antd-mobile'],
     // saltui: ['saltui'],
     // refast: ['refast'],
     // nattyStorage: ['natty-storage'],
