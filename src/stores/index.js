@@ -1,9 +1,11 @@
 import homeStore from './homeStore';
 import settingStore from './settingStore';
+import workBenchStore from './workBenchStore';
 
 const stores = {
   homeStore,
-  settingStore
+  settingStore,
+  workBenchStore,
 };
 
 export default stores;

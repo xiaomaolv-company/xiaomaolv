@@ -1,14 +1,29 @@
 import {observable, action} from "mobx";
+import axios from 'axios';
 
 class HomeStore {
 
-  @observable name;
+  @observable menuData;
 
   @action
-  changeName = name => this.name = name;
+  getMenu = () => {
+    this.menuData = [
+      {
+        text: '记账',
+        id: 1003,
+        icon:''
+      }
+    ];
+    return;
+    axios.get("/app/SysTabBarController/queryAllFuncList", {}).then(({data}) => {
+      this.menuData = data;
+    }).catch(error => {
+      throw new Error(error);
+    });
+  };
 
   constructor() {
-    this.name = '惠思雨';
+    this.menuData = [];
   }
 
 }

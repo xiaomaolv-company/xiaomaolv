@@ -3,7 +3,7 @@ import {withRouter} from 'react-router-dom';
 import * as comHistory from '@utils/common-history';
 import {observer, inject} from "mobx-react";
 
-import {Button, WingBlank} from "antd-mobile";
+import {Button, WingBlank,Grid} from "antd-mobile";
 
 @inject('homeStore')
 @inject('settingStore')
@@ -15,35 +15,28 @@ class Home extends Component {
     this.jump = this.jump.bind(this);
   }
 
-  changeName = () => {
-    const {homeStore: {changeName}} = this.props;
-    changeName("严小博");
-  };
-
-  changeAge = () => {
-    const {settingStore: {changeAge}} = this.props;
-    changeAge(30);
-  };
-
   jump() {
     comHistory.href(this, '/setting', {name: '惠思雨'});
   }
 
   render() {
     const {
-      homeStore: {name},
-      settingStore: {age}
+      homeStore: {menuData},
     } = this.props;
     return (
       <div className="page_home">
-        首页
-        <Button>按钮</Button>
+        <Grid
+          data={menuData}
+        />
       </div>
     );
   }
 
   componentDidMount() {
-
+    const {
+      homeStore: {getMenu},
+    } = this.props;
+    getMenu();
   }
 }
 

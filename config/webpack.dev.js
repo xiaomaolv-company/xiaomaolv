@@ -88,18 +88,18 @@ module.exports = {
   optimization: {
     splitChunks: {chunks: "all"},
   },
-  // devServer: {
-  //   // host: '192.168.2.122',
-  //   host: 'localhost',
-  //   port: 3000,
-  //   hot: true,
-  //   // hotOnly: true,
-  //   proxy: { // 跨域代理
-  //     '/**': {
-  //       target: 'http://192.168.1.108:80/',
-  //       secure: false, // 对https也能访问
-  //       changeOrigin: true
-  //     }
-  //   }
-  // }
+  devServer: {
+    // host: '192.168.2.122',
+    host: 'localhost',
+    port: 3000,
+    hot: true,
+    // hotOnly: true,
+    proxy: { // 跨域代理
+      '/**': {
+        target: 'http://192.168.1.108:8080/',
+        secure: false, // 对https也能访问
+        changeOrigin: true
+      }
+    }
+  }
 };
