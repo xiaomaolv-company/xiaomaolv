@@ -78,7 +78,7 @@ module.exports = {
     './src/app/app.js'
   ],
   output: {
-    filename: "[name].bundle.js",
+    filename: "[name].[chunkhash].js",
     path: path.resolve(__dirname, '../dist'),
     publicPath: "./", //  打包出来的index.html文件中的script标签上引入bundle.js文件路径上面会添加一个/
   },
@@ -173,18 +173,18 @@ module.exports = {
         },
         canPrint: true
       }),
-      // new UglifyJsPlugin({
-      //   uglifyOptions: {
-      //     compress: {
-      //       drop_debugger: true,
-      //       drop_console: true // 设置打包时将console语句不打包进去
-      //     }
-      //   },
-      //   parallel: true, // 开启并行压缩，充分利用cpu
-      //   exclude: /\.min\.js$/,
-      //   cache: true,
-      //   extractComments: false,
-      // })
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: {
+            drop_debugger: true,
+            drop_console: true // 设置打包时将console语句不打包进去
+          }
+        },
+        parallel: true, // 开启并行压缩，充分利用cpu
+        exclude: /\.min\.js$/,
+        cache: true,
+        extractComments: false,
+      })
     ],
   }
 };

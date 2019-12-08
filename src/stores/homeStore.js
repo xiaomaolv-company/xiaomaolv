@@ -1,30 +1,27 @@
 import {observable, action} from "mobx";
-import axios from 'axios';
+import service from "../service/http";
 
 class HomeStore {
 
-  @observable menuData;
+  @observable menuData = [];
 
   @action
   getMenu = () => {
-    this.menuData = [
-      {
-        text: '记账',
-        id: 1003,
-        icon:''
-      }
-    ];
-    return;
-    axios.get("/app/SysTabBarController/queryAllFuncList", {}).then(({data}) => {
-      this.menuData = data;
+    if (this.menuData.length > 0)
+      return;
+    service.get("/app/SysTabBarController/queryAllFuncList", {}).then(data => {
+      const menuData = data.map(item => {
+        return {
+          text: item.name,
+          id: item.id,
+          icon: 'icon-keeps-accounts'
+        }
+      });
+      this.menuData = menuData;
     }).catch(error => {
       throw new Error(error);
     });
   };
-
-  constructor() {
-    this.menuData = [];
-  }
 
 }
 

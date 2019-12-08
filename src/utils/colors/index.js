@@ -1,0 +1,10 @@
+export const colors1 = "#FF87A1";
+export const colors2 = "#7DBF2B";
+export const colors3 = "#F4EA2C";
+export const colors4 = "#3196FA";
+export const colors5 = "#1396DB";
+export const colors6 = "#FF8777";
+export const colors8 = "#92BEFE";
+export const colors9 = "#D4D4AA";
+export const colors10 = "#F71617";
+export const colors11 = "#12227A";

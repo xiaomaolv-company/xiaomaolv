@@ -1,5 +1,5 @@
 import {observable, action} from "mobx";
-import axios from "axios";
+import service from "../service/http";
 
 class WorkBenchStore {
   @observable tabBarData = [];
@@ -7,12 +7,23 @@ class WorkBenchStore {
 
   @action
   getTabBarData = () => {
-    axios.get("/app/SysTabBarController/queryAllTabBar", {}).then(({data}) => {
-      console.log("哈哈哈", data)
+    if (this.tabBarData.length > 0)
+      return;
+    service.get("/app/SysTabBarController/queryAllTabBar", {}).then(data => {
       const tabBarData = data.map(item => {
-        return {
-          tabBarName: item.name,
-          tabBarId: item.id,
+        if (item.name == '首页') {
+          return {
+            tabBarName: item.name,
+            tabBarId: item.id,
+            icon: 'icon-home-page'
+          }
+        }
+        if (item.name == '我的') {
+          return {
+            tabBarName: item.name,
+            tabBarId: item.id,
+            icon: 'icon-personal'
+          }
         }
       });
       this.tabBarData = tabBarData;

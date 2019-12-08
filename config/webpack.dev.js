@@ -96,7 +96,8 @@ module.exports = {
     // hotOnly: true,
     proxy: { // 跨域代理
       '/**': {
-        target: 'http://192.168.1.108:8080/',
+        // target: 'http://192.168.1.108:8080/',
+        target: 'http://localhost:8080/',
         secure: false, // 对https也能访问
         changeOrigin: true
       }

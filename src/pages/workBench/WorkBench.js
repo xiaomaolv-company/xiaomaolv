@@ -64,18 +64,8 @@ class WorkBench extends Component {
                   <TabBar.Item
                     title={tabBarItem.tabBarName}
                     key={tabBarItem.tabBarId}
-                    icon={<div style={{
-                      width: '22px',
-                      height: '22px',
-                      background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat'
-                    }}
-                    />}
-                    selectedIcon={<div style={{
-                      width: '22px',
-                      height: '22px',
-                      background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat'
-                    }}
-                    />}
+                    icon={<i style={{fontSize: '22px'}} className={`iconfont ${tabBarItem.icon}`}></i>}
+                    selectedIcon={<i style={{fontSize: '22px'}} className={`iconfont ${tabBarItem.icon}`}></i>}
                     selected={selectedTab == tabBarItem.tabBarId}
                     onPress={() => {
                       this.handleOnPress(tabBarItem.tabBarId);
@@ -99,6 +89,7 @@ class WorkBench extends Component {
     const {workBenchStore: {getTabBarData}} = this.props;
     getTabBarData();
   }
+
 }
 
 export default WorkBench;
