@@ -6,6 +6,9 @@ import "./Home.less";
 import {Button, WingBlank, Grid, Flex} from "antd-mobile";
 import * as colors from "../../utils/colors";
 
+import xiaomaolv from "../../asset/images/xiaomaolv.jpg";
+
+import cf from "../../asset/images/qqqq.jpg";
 @inject('homeStore')
 @observer
 class Home extends Component {
@@ -51,16 +54,26 @@ class Home extends Component {
     } = this.props;
     return (
       <div className="page_home">
+        <div id="aaa"></div>
         <Grid
           data={menuData}
           renderItem={this.renderGridItem}
           onClick={this.gridItemClick}
         />
+
+        <div style={{width: "200px", height: "200px"}}>
+          <img style={{width: "200px", height: "200px"}} src={xiaomaolv} alt=""/>
+        </div>
+
+        <div><img style={{width: "300px", height: "300px"}} src={cf} alt=""/></div>
+
+        <div className="home-img"></div>
       </div>
     );
   }
 
   componentDidMount() {
+    console.log($("#aaa"),'胡思思与')
     const {
       homeStore: {getMenu},
     } = this.props;

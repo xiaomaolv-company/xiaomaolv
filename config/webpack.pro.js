@@ -18,8 +18,8 @@ const plugins = [
   }),
   new CleanWebpackPlugin(), // 每次重新打包都会先删除dist文件夹里面的内容
   new MiniCssExtractPlugin({ // 从js里面将css抽离出来的插件
-    filename: "[name].css",
-    chunkFilename: "[name].chunk.css"
+    filename: "[name].[chunkhash:8].css",
+    chunkFilename: "[name].[chunkhash:8].css"
   }),
   new HappyPack({
     id: 'happyBabel',
@@ -55,7 +55,7 @@ const plugins = [
       'css-loader',
       'less-loader',
     ]
-  })
+  }),
 ];
 files.forEach(file => {
   if (/.*\.dll\.js$/.test(file)) {
@@ -72,13 +72,13 @@ files.forEach(file => {
 
 module.exports = {
   mode: "production",
-  // devtool: "cheap-module-source-map", //快速定位js代码出错的位置
-  entry: [
-    'react-hot-loader/patch',
-    './src/app/app.js'
-  ],
+  devtool: "cheap-module-source-map", //快速定位js代码出错的位置
+  entry: {
+    jquery: './src/asset/js/jquery-3.4.1.min.js',//通过入口文件配置，将本地的第三方js文件打到dist文件夹中，并且index.html中会自动引入，入口文件的顺序，也是index.html中的顺序
+    main: './src/app/app.js',
+  },
   output: {
-    filename: "[name].[chunkhash].js",
+    filename: "[name].[chunkhash:8].js",
     path: path.resolve(__dirname, '../dist'),
     publicPath: "./", //  打包出来的index.html文件中的script标签上引入bundle.js文件路径上面会添加一个/
   },
@@ -86,16 +86,16 @@ module.exports = {
     rules: [
       {
         test: /\.(jpg|png|gif|svg|pdf|ico|jpeg)$/,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              name: '[path][name].[ext]',
-              outputPath: 'images/',
-              limit: 204800, // 只有图片大于200KB的话才会被打包到imgages文件夹下面，否则会被打成base64的形式，打进bundle.js中
-            }
+        use: {
+          loader: "url-loader",  // happyPack 对url-loader和file-loader支持不友好
+          options: {
+            name: '[name].[hash:8].[ext]',
+            // publicPath: "../",
+            outputPath: 'images/', // 将图片打包到dist文件夹下面的images文件夹里面,同时webpack会将js代码中引入的图片路径替掉
+            // limit: 204800, // 只有图片大于200KB的话才会被打包到imgages文件夹下面，否则会被打成base64的形式，打进bundle.js中
+            limit: 200
           }
-        ]
+        },
       },
       {
         test: /\.(ttf|eot|svg|woff|woff2)$/, //打包iconfont

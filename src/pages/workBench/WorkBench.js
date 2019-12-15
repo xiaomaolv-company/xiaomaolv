@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom';
 import {observer, inject} from "mobx-react";
 import {TabBar} from "antd-mobile";
 import "./WorkBench.less";
+import service from "../../service/http";
 
 import Home from "../home/Home";
 import Setting from "../setting/Setting";
@@ -88,6 +89,7 @@ class WorkBench extends Component {
   componentDidMount() {
     const {workBenchStore: {getTabBarData}} = this.props;
     getTabBarData();
+
   }
 
 }

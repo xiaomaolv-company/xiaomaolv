@@ -8,14 +8,16 @@ import {withRouter} from 'react-router-dom';
 @inject("keepingAccountsStore")
 @observer
 class KeepingAccounts extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     const {} = this.props;
     return (
       <div className="KeepingAccounts">
-        记账
-        <PullToRefresh
-
-        />
+        <div id="viewport"></div>
       </div>
     );
   }
