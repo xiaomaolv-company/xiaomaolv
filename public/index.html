@@ -25,10 +25,10 @@
     }
 
     if (!getUrlParam("code")) { // 此处做判断的原因是会不停的跳转至授权免登页面
-      window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa71ab380527ceb2a&redirect_uri=http://172.81.203.18&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect'
+      window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa71ab380527ceb2a&redirect_uri=http://xiaomaolva.cn&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect'
     } else {
       $.ajax({
-        url: 'http://172.81.203.18/wechatlogin/app/userLogin',
+        url: 'http://xiaomaolva.cn/wechatlogin/app/userLogin',
         headers: {
           code: getUrlParam("code")
         },
