@@ -1,6 +1,6 @@
 import {observable, action} from "mobx";
 import service from "../service/http";
-
+import remotedev from 'mobx-remotedev';
 class HomeStore {
 
   @observable menuData = [];
@@ -26,4 +26,4 @@ class HomeStore {
 }
 
 const homeStore = new HomeStore();
-export default homeStore;
+export default remotedev(homeStore);

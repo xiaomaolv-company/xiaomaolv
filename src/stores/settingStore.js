@@ -1,4 +1,5 @@
 import {observable, action} from "mobx";
+import remotedev from 'mobx-remotedev';
 
 class SettingStore {
   @observable age;
@@ -12,4 +13,4 @@ class SettingStore {
 }
 
 const settingStore = new SettingStore();
-export default settingStore;
+export default remotedev(settingStore);

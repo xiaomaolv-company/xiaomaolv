@@ -9,23 +9,12 @@ class WorkBenchStore {
   getTabBarData = () => {
     if (this.tabBarData.length > 0)
       return;
-    service.get("/app/SysTabBarController/queryAllTabBar", {}).then(data => {
-      const tabBarData = data.map(item => {
-        if (item.name == '首页') {
-          return {
-            tabBarName: item.name,
-            tabBarId: item.id,
-            icon: 'icon-home-page'
-          }
-        }
-        if (item.name == '我的') {
-          return {
-            tabBarName: item.name,
-            tabBarId: item.id,
-            icon: 'icon-personal'
-          }
-        }
-      });
+    service.get("/queryAllTabBar", {}).then(data => {
+      const tabBarData = data.map(item => ({
+        ...item,
+        tabBarName: item.name,
+        tabBarId: item.id,
+      }));
       this.tabBarData = tabBarData;
       this.selectedTab = tabBarData[0].tabBarId;
     }).catch(error => {

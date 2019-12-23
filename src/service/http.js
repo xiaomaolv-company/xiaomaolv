@@ -12,7 +12,7 @@ service.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencod
 
 // request 的拦截----自定义相关操作
 service.interceptors.request.use(config => {
-  Toast.loading("加载中...", 0);
+  Toast.loading("请稍候...", 0);
   // 在此处可设置请求头
   return config;
 }, error => {
@@ -34,7 +34,6 @@ service.interceptors.response.use(({data, status}) => {
   } else {
     Toast.fail("发生了一点小错误哦！", 3);
   }
-  return response;
 }, error => {
   Toast.fail("发生了一点小错误哦！", 3);
   throw new Error(error);

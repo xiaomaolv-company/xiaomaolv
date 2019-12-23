@@ -3,10 +3,8 @@ import {withRouter} from 'react-router-dom';
 import {observer, inject} from "mobx-react";
 import {TabBar} from "antd-mobile";
 import "./WorkBench.less";
-import service from "../../service/http";
-
-import Home from "../home/Home";
 import Setting from "../setting/Setting";
+import * as commonHistory from '@utils/common-history';
 
 @withRouter
 @inject("workBenchStore")
@@ -23,12 +21,17 @@ class WorkBench extends Component {
    */
   handleRenderTabItemContent = (tabBarItem) => {
     const {tabBarName} = tabBarItem;
-    if (tabBarName === '首页') {
-      return (
-        <Home
+    if (tabBarName === '明细') {
 
-        />
-      )
+    }
+    if (tabBarName === '图表') {
+
+    }
+    if (tabBarName === '记账') {
+      // commonHistory.href(this, '/keeping-accounts');
+    }
+    if (tabBarName === '账单') {
+
     }
     if (tabBarName === '我的') {
       return (
@@ -43,7 +46,12 @@ class WorkBench extends Component {
    * tabBarItem 的点击交互效果时间
    * @param tabBarName
    */
-  handleOnPress = (tabBarId) => {
+  handleOnPress = (tabBarItem) => {
+    const {tabBarId, tabBarName} = tabBarItem;
+    if (tabBarName === '记账') {
+      commonHistory.href(this, '/keeping-accounts');
+      return;
+    }
     const {workBenchStore: {handleOnPress}} = this.props;
     handleOnPress(tabBarId);
   };
@@ -69,7 +77,7 @@ class WorkBench extends Component {
                     selectedIcon={<i style={{fontSize: '22px'}} className={`iconfont ${tabBarItem.icon}`}></i>}
                     selected={selectedTab == tabBarItem.tabBarId}
                     onPress={() => {
-                      this.handleOnPress(tabBarItem.tabBarId);
+                      this.handleOnPress(tabBarItem);
                     }}
                   >
                     {
@@ -87,6 +95,7 @@ class WorkBench extends Component {
   }
 
   componentDidMount() {
+
     const {workBenchStore: {getTabBarData}} = this.props;
     getTabBarData();
 

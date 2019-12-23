@@ -7,13 +7,17 @@ import {observer, inject} from "mobx-react";
 @observer
 class Setting extends Component {
   render() {
-    const {settingStore: {age}} = this.props;
+    const {settingStore: {age, changeAge}} = this.props;
     return (
       <div className="page_Setting">
-        设置
+        <div onClick={() => {
+          changeAge(20)
+        }}>设置
+        </div>
         <button onClick={() => {
           comHistory.back(-1)
-        }}>返回</button>
+        }}>返回
+        </button>
         <div>年龄：{age}</div>
       </div>
     );

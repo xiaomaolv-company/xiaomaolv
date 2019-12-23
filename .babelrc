@@ -31,7 +31,7 @@
       "import",
       {
         "libraryName": "antd-mobile",
-        "style": true
+        "style": "css"
       }
     ],
     "react-hot-loader/babel"

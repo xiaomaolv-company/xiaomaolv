@@ -7,8 +7,8 @@ import {Button, WingBlank, Grid, Flex} from "antd-mobile";
 import * as colors from "../../utils/colors";
 
 import xiaomaolv from "../../asset/images/xiaomaolv.jpg";
-
 import cf from "../../asset/images/qqqq.jpg";
+
 @inject('homeStore')
 @observer
 class Home extends Component {

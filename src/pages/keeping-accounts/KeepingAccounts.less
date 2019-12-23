@@ -1,8 +1,32 @@
 .KeepingAccounts {
-  #viewport {
-    width: 1000px;
-    height: 800px;
-    margin: 0 auto;
-    background-color: pink;
+  //position: relative;
+
+  .inputWrapper {
+    width: 100%;
+    position: absolute;
+    bottom: 200px;
+
   }
+
+  .gridItem {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .iconfontWrapper {
+      margin-bottom: 5px;
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      border-radius: 50%;
+      .iconfont {
+        font-size: 24px;
+      }
+    }
+    .name {
+      font-size: 12px;
+    }
+  }
+
 }

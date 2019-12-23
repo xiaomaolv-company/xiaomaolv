@@ -7,7 +7,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // css 代码分割插件
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"); // 压缩css 代码的插件
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 const HappyPack = require('happypack');// 多线程打包，提升打包速度
 const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length});
 const files = fs.readdirSync(path.resolve(__dirname, '../dll'));
@@ -136,6 +136,7 @@ module.exports = {
     }
   },
   optimization: {
+    minimize: true,
     usedExports: true, // css 代码分割
     splitChunks: { // 代码分割，将公用的第三方类库，打包到一个单独的js文件中，这个文件名以vendors开头
       chunks: 'all', // 代码分割对哪一块代码有效，all 代表对同步和异步代码都进行分割
@@ -173,17 +174,15 @@ module.exports = {
         },
         canPrint: true
       }),
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          compress: {
-            drop_debugger: true,
-            drop_console: true // 设置打包时将console语句不打包进去
-          }
-        },
-        parallel: true, // 开启并行压缩，充分利用cpu
-        exclude: /\.min\.js$/,
+      new TerserPlugin({
         cache: true,
-        extractComments: false,
+        parallel: true,
+        sourceMap: true,
+        terserOptions: {
+          compress: {
+            drop_console: true,
+          },
+        }
       })
     ],
   }
