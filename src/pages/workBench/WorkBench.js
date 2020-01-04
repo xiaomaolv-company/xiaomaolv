@@ -3,7 +3,9 @@ import {withRouter} from 'react-router-dom';
 import {observer, inject} from "mobx-react";
 import {TabBar} from "antd-mobile";
 import "./WorkBench.less";
-import Setting from "../setting/Setting";
+import Setting from "../setting";
+import Chart from "../chart";
+import Details from "../details";
 import * as commonHistory from '@utils/common-history';
 
 @withRouter
@@ -22,10 +24,18 @@ class WorkBench extends Component {
   handleRenderTabItemContent = (tabBarItem) => {
     const {tabBarName} = tabBarItem;
     if (tabBarName === '明细') {
+      return (
+        <Details
 
+        />
+      )
     }
     if (tabBarName === '图表') {
+      return (
+        <Chart
 
+        />
+      )
     }
     if (tabBarName === '记账') {
       // commonHistory.href(this, '/keeping-accounts');

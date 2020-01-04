@@ -146,7 +146,7 @@ class KeepingAccounts extends Component {
     const {
       keepingAccountsStore: {
         getCostTypeData,
-        setMoneyKeyboardWrapProps
+        setMoneyKeyboardWrapProps,
       }
     } = this.props;
     getCostTypeData();

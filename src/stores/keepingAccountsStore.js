@@ -56,7 +56,8 @@ class KeepingAccountsStore {
   saveCostData = (value) => {
     const reqData = {
       balance: value,
-      configId: this.currentActiveTabItemId
+      configId: this.currentActiveTabItemId,
+      // userId:'10015'
     };
     service.post('/addCostDetail', reqData).then(data => {
       console.log("返回的数据", data)
