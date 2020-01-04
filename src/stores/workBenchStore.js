@@ -15,8 +15,8 @@ class WorkBenchStore {
         tabBarName: item.name,
         tabBarId: item.id,
       }));
-      this.tabBarData = tabBarData;
-      this.selectedTab = tabBarData[0].tabBarId;
+      this.setTabBarData(tabBarData);
+      this.handleOnPress(tabBarData[0].tabBarId);
     }).catch(error => {
       throw new Error(error);
     })
@@ -26,6 +26,12 @@ class WorkBenchStore {
   handleOnPress = (tabBarId) => {
     this.selectedTab = tabBarId;
   };
+
+  @action
+  setTabBarData = (data) => {
+    this.tabBarData = data;
+  }
+
 
 }
 
