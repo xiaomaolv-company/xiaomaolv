@@ -6,6 +6,8 @@ import "./WorkBench.less";
 import Setting from "../setting";
 import Chart from "../chart";
 import Details from "../details";
+import Mine from '../mine';
+import Bill from '../bill';
 import * as commonHistory from '@utils/common-history';
 
 @withRouter
@@ -41,11 +43,15 @@ class WorkBench extends Component {
       // commonHistory.href(this, '/keeping-accounts');
     }
     if (tabBarName === '账单') {
+      return (
+        <Bill
 
+        />
+      )
     }
     if (tabBarName === '我的') {
       return (
-        <Setting
+        <Mine
 
         />
       )
