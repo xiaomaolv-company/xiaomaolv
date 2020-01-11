@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {observer, inject} from "mobx-react";
-import {toJS} from 'mobx';
 import {Picker, List} from 'antd-mobile';
+import {toJS} from "mobx";
 import "./Bill.less";
 
 @inject("billStore")
@@ -31,7 +31,6 @@ class Bill extends Component {
   }
   onOk(v){
     this.setState({asyncValue:[v+'']})
-    //const year = new Date().getFullYear();
     const {
       queryBillList
     } = this.props.billStore
@@ -42,7 +41,9 @@ class Bill extends Component {
     const {
       recorderSummaryData
     } = this.props.billStore
-    console.log(toJS(recorderSummaryData),'tttt')
+
+    const monthBillData = Object.prototype.toString.call(recorderSummaryData.monthBill) === "[object Array]"?recorderSummaryData.monthBill:[];
+    const yearBillData = Object.prototype.toString.call(recorderSummaryData.yearBill) === "[object Array]"?recorderSummaryData.yearBill[0]:{income:0,balance:0,pay:0};
     const me = this
     return (
 
@@ -51,7 +52,7 @@ class Bill extends Component {
           <div className="billHeader_top">
             <div className="billHeader_top_left">
               <p className="billHeader_top_left_balance_text">结余</p>
-              <p className="billHeader_top_left_balance">-132.00</p>
+              <p className="billHeader_top_left_balance">{yearBillData.balance.toFixed(2)}</p>
             </div>
             <div className="billHeader_top_right">
               <Picker
@@ -68,12 +69,12 @@ class Bill extends Component {
           </div>
           <div className="billHeader_bottom">
             <div className="income_wrapper">
-              <p className="income_text">收入</p>
-              <p className="income_num">0.00</p>
+              <p className="income_text">收入：</p>
+              <p className="income_num">{yearBillData.income.toFixed(2)}</p>
             </div>
             <div className="pay_wrapper">
-              <p className="pay_text">支出</p>
-              <p className="pay_num">132.00</p>
+              <p className="pay_text">支出：</p>
+              <p className="pay_num">{yearBillData.pay.toFixed(2)}</p>
             </div>
           </div>
         </div>
@@ -85,14 +86,14 @@ class Bill extends Component {
             <div className="formheaderItem">结余</div>
           </div>
           {
-            recorderSummaryData.length>0 ?
-              recorderSummaryData.map(recordItem=>{
+            monthBillData.length>0 ?
+              monthBillData.map(monthBillDataItem=>{
                 return(
-                  <div style={{display:'flex'}} key={recordItem.month} className="recorderList">
-                    <div className="recorderItem">{recordItem.month}</div>
-                    <div className="recorderItem">{recordItem.income}</div>
-                    <div className="recorderItem">{recordItem.pay}</div>
-                    <div className="recorderItem">{recordItem.balance}</div>
+                  <div style={{display:'flex'}} key={monthBillDataItem.month} className="recorderList">
+                    <div className="recorderItem">{monthBillDataItem.month}</div>
+                    <div className="recorderItem">{monthBillDataItem.income.toFixed(2)}</div>
+                    <div className="recorderItem">{monthBillDataItem.pay.toFixed(2)}</div>
+                    <div className="recorderItem">{monthBillDataItem.balance.toFixed(2)}</div>
                   </div>
                 )
               }):null
