@@ -1,0 +1,82 @@
+.Bill{
+  .billHeader{
+    background-color: #FDDB31;
+    .billHeader_top{
+      display: flex;
+      position: relative;
+      .billHeader_top_left{
+        width: 100%;
+        text-align: center;
+        .billHeader_top_left_balance_text{
+          color: rgba(128,128,128,0.5);
+        }
+        .billHeader_top_left_balance{
+          font-size: 27px;
+          margin-top: 5px;
+        }
+      }
+      .billHeader_top_right{
+        .am-list-item-middle{
+          background-color: #FDDB31;
+          position: relative;
+          .am-list-extra{
+            color: black;
+            //font-weight: bold;
+            position: absolute;
+            left: 30px;
+            font-family: inherit;
+          }
+          .am-list-arrow{
+            position: absolute;
+            right: 5px;
+          }
+        }
+        position: absolute;
+        width: 150px;
+        height:58px;
+        //background-color: aqua;
+        top:15px;
+        right: 5px;
+      }
+    }
+  }
+  .billHeader_bottom{
+    display: flex;
+    .income_wrapper{
+      display: flex;
+      width: 50%;
+      //border-right: 1px solid rgba(128,128,128,0.5);
+      padding-right: 10px;
+      justify-content: flex-end;
+    }
+    .pay_wrapper{
+      display: flex;
+      width: 50%;
+      padding-left: 10px;
+      justify-content: flex-start;
+    }
+  }
+  .billBottom{
+    .formheader{
+      .formheaderItem{
+        width: 25%;
+        text-align: center;
+        border-bottom: 1px solid gainsboro;
+        color: #808080;
+        height:26px;
+        display: flex;
+        align-items: center;
+        justify-content: center
+      }
+    }
+    .recorderList{
+      border-bottom: 1px solid gainsboro;
+      align-items: center;
+      height: 30px;
+      .recorderItem{
+        width: 25%;
+        text-align: center;
+      }
+    }
+  }
+}
