@@ -7,9 +7,13 @@ class BillStore {
   @action
   queryBillList = (data) => {
     service.post('/queryBillList',data).then((recorderList) => {
-      this.recorderSummaryData = recorderList
+      this.setRecorderSummaryData(recorderList)
     })
 
+  }
+  @action
+  setRecorderSummaryData = (data) => {
+    this.recorderSummaryData = data
   }
 }
 
