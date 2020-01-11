@@ -1,10 +1,47 @@
 .Details {
+  .details-top-area {
+    background-color: #FDDB31;
+    width: 100%;
+    height: 80px;
+
+    .dateTime {
+      width: 30vw;
+      height: 100%;
+      padding: 10px;
+      .year {
+        font-size: 12px;
+        color: #666;
+      }
+      .month {
+        margin-top: 18px;
+        font-size: 22px;
+        border-right: 1px solid #666;
+        .iconfont {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .amount {
+      width: 70vw;
+      height: 100%;
+
+      .amount-l {
+        width: 50%;
+        height: 100%;
+        display: inline-block;
+        padding: 10px;
+      }
+    }
+  }
+
   .rowWrapper {
     padding: 10px 16px;
 
     .costType {
       display: flex;
       align-items: center;
+
       .costIcon {
         width: 32px;
         height: 32px;
@@ -14,7 +51,6 @@
         text-align: center;
         line-height: 32px;
         font-size: 22px;
-        color: #3296fa;
       }
 
       .costName {

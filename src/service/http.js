@@ -12,6 +12,7 @@ service.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencod
 
 // request 的拦截----自定义相关操作
 service.interceptors.request.use(config => {
+  // console.log("请求头的配置",config)
   config.url = `/app${config.url}`;
   Toast.loading("请稍候...", 0);
   // 在此处可设置请求头

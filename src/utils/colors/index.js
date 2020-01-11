@@ -8,3 +8,4 @@ export const colors8 = "#92BEFE";
 export const colors9 = "#D4D4AA";
 export const colors10 = "#F71617";
 export const colors11 = "#12227A";
+export const theme = '#FDDB31';

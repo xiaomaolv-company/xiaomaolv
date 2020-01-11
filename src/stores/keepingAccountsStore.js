@@ -17,7 +17,7 @@ class KeepingAccountsStore {
     service.get('/queryCostType').then(data => {
       const costTypeData = data.filter(item => item.type == 1).map(item => ({...item, text: item.name}));
       const incomeTypeData = data.filter(item => item.type == 2).map(item => ({...item, text: item.name}));
-      this.tabsData = [
+      const tabsData = [
         {
           title: '支出',
           data: costTypeData
@@ -27,9 +27,19 @@ class KeepingAccountsStore {
           data: incomeTypeData
         }
       ];
+      this.setTabsData(tabsData);
     }).catch(error => {
       throw new Error(error);
     })
+  };
+
+  /**
+   *  设置tabsData数据
+   * @param data
+   */
+  @action
+  setTabsData = (data) => {
+    this.tabsData = data;
   };
 
   @action
@@ -60,7 +70,6 @@ class KeepingAccountsStore {
       // userId:'10015'
     };
     service.post('/addCostDetail', reqData).then(data => {
-      console.log("返回的数据", data)
       commonHistory.back();
     })
   }

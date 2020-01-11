@@ -88,6 +88,7 @@ module.exports = {
       "@components": path.resolve(__dirname, '../src/components'),
       "@pages": path.resolve(__dirname, '../src/pages'),
       "@utils": path.resolve(__dirname, '../src/utils'),
+      // "react-dom": '@hot-loader/react-dom'
     }
   },
   optimization: {
