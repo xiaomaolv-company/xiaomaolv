@@ -5,6 +5,26 @@ import {ListView} from "antd-mobile";
 import {fromJS} from "immutable";
 import moment from "moment";
 
+const defaultState = fromJS({
+  listProps: {
+    refreshing: false,
+    loading: false,
+    noMore: false,
+    page: 1,
+    rows: 8
+  },
+  listDataArr: [],
+  dateTimeData: {
+    year: moment().format("YYYY"),
+    month: moment().format("MM")
+  },
+  totalAmount: {
+    income: 0,
+    expend: 0
+  },
+
+});
+
 @remotedev
 class DetailsStore {
 
@@ -13,38 +33,31 @@ class DetailsStore {
     rowHasChanged: (row1, row2) => row1 !== row2,
   });
 
-  @observable listProps = {
-    refreshing: false,
-    loading: false,
-    noMore: false,
-    page: 1,
-    rows: 8
-  };
+  @observable listProps = defaultState.get("listProps");
 
-  @observable listDataArr = []; // 用于保存列表所有页的数据，由于listView数据源不能记住上一页的数据，所以要这样处理
+  @observable listDataArr = defaultState.get("listDataArr"); // 用于保存列表所有页的数据，由于listView数据源不能记住上一页的数据，所以要这样处理
 
-  @observable dateTimeData = {
-    year: moment().format("YYYY"),
-    month: moment().format("MM")
-  };
+  @observable dateTimeData = defaultState.get("dateTimeData");
 
-  @observable totalAmount = {
-    income: 0,
-    expend: 0
-  };
+  @observable totalAmount = defaultState.get("totalAmount");
 
   /**
    * 查询列表数据
    */
   @action
-  queryCostList = () => {
-    const newListProps = fromJS(this.listProps).toJS();
+  queryCostList = async () => {
+    const newListProps = this.listProps.toJS();
     const reqData = {
       page: this.listProps.page,
       rows: this.listProps.rows,
       year: this.dateTimeData.year,
       month: this.dateTimeData.month
     };
+
+    // const data = await service.post('/queryCostList', reqData);
+    // console.log(data,'获取到的数据')
+
+
     service.post('/queryCostList', reqData, {params: 'form'}).then(({recorderList, monthSumData}) => {
       // 将刷新状态消除掉
       newListProps.refreshing = false;
@@ -70,7 +83,7 @@ class DetailsStore {
    */
   @action
   setDetailsData = () => {
-    this.detailsData = this.detailsData.cloneWithRows(this.listDataArr);
+    this.detailsData = this.detailsData.cloneWithRows(this.listDataArr.toJS());
   };
 
   /**
@@ -79,7 +92,7 @@ class DetailsStore {
    */
   @action
   setListProps = (data) => {
-    this.listProps = data;
+    this.listProps = fromJS(data);
   };
 
   /**
@@ -88,24 +101,38 @@ class DetailsStore {
    */
   @action
   setListDataArr = (data) => {
-    this.listDataArr = [...this.listDataArr, ...data];
+    this.listDataArr = fromJS([...this.listDataArr.toJS(), ...data]);
     this.setDetailsData();
   };
 
   @action
   setDateTimeData = (data) => {
-    this.dateTimeData = data;
+    this.dateTimeData = fromJS(data);
   };
 
   @action
   clearListDataArr = () => {
-    this.listDataArr = [];
-  }
+    this.listDataArr = fromJS([]);
+  };
 
   @action
   setTotalAmount = (data) => {
-    this.totalAmount = data;
-  }
+    this.totalAmount = fromJS(data);
+  };
+
+  /**
+   * 恢复默认的state，目的是为了刷新页面
+   */
+  @action
+  recoverDetailsDefaultState = () => {
+    this.detailsData = new ListView.DataSource({
+      rowHasChanged: (row1, row2) => row1 !== row2,
+    });
+    this.listProps = defaultState.get("listProps");
+    this.listDataArr = defaultState.get("listDataArr");
+    this.dateTimeData = defaultState.get("dateTimeData");
+    this.totalAmount = defaultState.get("totalAmount");
+  };
 
 }
 

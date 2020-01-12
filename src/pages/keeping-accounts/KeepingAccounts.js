@@ -4,10 +4,12 @@ import {observer, inject} from "mobx-react";
 import {Tabs, Grid, List, InputItem} from 'antd-mobile';
 import {withRouter} from 'react-router-dom';
 import keepingAccountsStore from "../../stores/keepingAccountsStore";
+
 // import {toJS} from "mobx";
 
 @withRouter
 @inject("keepingAccountsStore")
+@inject("detailsStore")
 @observer
 class KeepingAccounts extends Component {
 
@@ -93,8 +95,12 @@ class KeepingAccounts extends Component {
     const {
       keepingAccountsStore: {
         saveCostData
+      },
+      detailsStore: {
+        recoverDetailsDefaultState
       }
     } = this.props;
+    recoverDetailsDefaultState();
     saveCostData(value);
     this.setState({inputVisible: false})
   };

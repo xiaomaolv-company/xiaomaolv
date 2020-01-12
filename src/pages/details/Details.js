@@ -72,7 +72,7 @@ class Details extends Component {
         queryCostList
       }
     } = this.props;
-    const newListProps = fromJS(listProps).toJS();
+    const newListProps = listProps.toJS();
     if (newListProps.noMore)
       return;
     newListProps.page = newListProps.page + 1;
@@ -101,7 +101,7 @@ class Details extends Component {
         clearListDataArr
       }
     } = this.props;
-    const newListProps = fromJS(listProps).toJS();
+    const newListProps = listProps.toJS();
     newListProps.page = 1;
     setListProps(newListProps);
     clearListDataArr();
@@ -120,22 +120,25 @@ class Details extends Component {
     const {
       detailsStore: {
         detailsData,
-        listProps: {
-          refreshing,
-          rows,
-          loading,
-          noMore
-        },
-        dateTimeData: {
-          year,
-          month
-        },
-        totalAmount: {
-          income,
-          expend
-        }
+        listProps,
+        dateTimeData,
+        totalAmount
       }
     } = this.props;
+    const {
+      refreshing,
+      rows,
+      loading,
+      noMore
+    } = listProps.toJS();
+    const {
+      year,
+      month
+    } = dateTimeData.toJS();
+    const {
+      income,
+      expend
+    } = totalAmount.toJS();
     const {listViewHeight, datePickerVisible, dateValue} = this.state;
     return (
       <div className="Details">
