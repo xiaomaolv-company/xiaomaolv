@@ -47,15 +47,15 @@ class DetailsStore {
   @action
   queryCostList = async () => {
     const newListProps = this.listProps.toJS();
+    const newDateTimeData = this.dateTimeData.toJS();
     const reqData = {
-      page: this.listProps.page,
-      rows: this.listProps.rows,
-      year: this.dateTimeData.year,
-      month: this.dateTimeData.month
+      page: newListProps.page,
+      rows: newListProps.rows,
+      year: newDateTimeData.year,
+      month: newDateTimeData.month
     };
 
     // const data = await service.post('/queryCostList', reqData);
-    // console.log(data,'获取到的数据')
 
 
     service.post('/queryCostList', reqData, {params: 'form'}).then(({recorderList, monthSumData}) => {

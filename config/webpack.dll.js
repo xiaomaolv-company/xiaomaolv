@@ -7,10 +7,10 @@ const webpack = require('webpack');
 module.exports = {
   mode: 'production',
   entry: {
-    // lodash: ['lodash'],
+    axios: ['axios'],
     antdMobile: ['antd-mobile'],
-    // saltui: ['saltui'],
-    // refast: ['refast'],
+    immutable: ['immutable'],
+    moment: ['moment'],
     // nattyStorage: ['natty-storage'],
     // nattyFetch: ['natty-fetch'],
     // saltIcon: ['salt-icon'],

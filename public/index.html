@@ -13,60 +13,60 @@
 <script>
   window.onload = function () {
 
-    // /**
-    //  * 获取URL中的参数
-    //  * @param key 参数的key
-    //  * @returns {any}
-    //  */
-    // function getUrlParam(key) {
-    //   var reg = new RegExp(key + '=([^&]*)');
-    //   var results = location.search.match(reg);
-    //   return results ? results[1] : null;
-    // }
-    //
-    // if (!getUrlParam("code")) { // 此处做判断的原因是会不停的跳转至授权免登页面
-    //   window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa71ab380527ceb2a&redirect_uri=http://xiaomaolva.cn&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect'
-    // } else {
-    //   $.ajax({
-    //     url: 'http://xiaomaolva.cn/wechatlogin/app/userLogin',
-    //     headers: {
-    //       code: getUrlParam("code")
-    //     },
-    //     type: "get",
-    //     success: function (data) {
-    //       if (data) {
-    //         const {statusCode, appData, message} = data;
-    //         if (statusCode === 1) { // 登录验证成功
-    //           window.sessionStorage.setItem("loginUserInfo", appData.user);
-    //           let script = document.createElement("script");
-    //           script.src = "./main.bundle.js";
-    //           document.getElementById("body").appendChild(script);
-    //         } else {
-    //           alert(message);
-    //         }
-    //       } else {
-    //         alert("登录验证失败！");
-    //       }
-    //     }
-    //   });
-    // }
+    /**
+     * 获取URL中的参数
+     * @param key 参数的key
+     * @returns {any}
+     */
+    function getUrlParam(key) {
+      var reg = new RegExp(key + '=([^&]*)');
+      var results = location.search.match(reg);
+      return results ? results[1] : null;
+    }
+
+    if (!getUrlParam("code")) { // 此处做判断的原因是会不停的跳转至授权免登页面
+      window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa71ab380527ceb2a&redirect_uri=http://xiaomaolva.cn&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect'
+    } else {
+      $.ajax({
+        url: 'http://xiaomaolva.cn/wechatlogin/app/userLogin',
+        headers: {
+          code: getUrlParam("code")
+        },
+        type: "get",
+        success: function (data) {
+          if (data) {
+            const {statusCode, appData, message} = data;
+            if (statusCode === 1) { // 登录验证成功
+              window.sessionStorage.setItem("loginUserInfo", appData.user);
+              let script = document.createElement("script");
+              script.src = "./main.bundle.js";
+              document.getElementById("body").appendChild(script);
+            } else {
+              alert(message);
+            }
+          } else {
+            alert("登录验证失败！");
+          }
+        }
+      });
+    }
 
 
     // 本地测试
-    $.ajax({
-      url: 'http://localhost:3000/loginDev',
-      type: "POST",
-      dataType: "json",
-      data: {
-        id: "10013"
-      },
-      success: function (data) {
-        console.log(data, '登录成功')
-        let script = document.createElement("script");
-        script.src = "./main.bundle.js";
-        document.getElementById("body").appendChild(script);
-      }
-    });
+    // $.ajax({
+    //   url: 'http://localhost:3000/loginDev',
+    //   type: "POST",
+    //   dataType: "json",
+    //   data: {
+    //     id: "10013"
+    //   },
+    //   success: function (data) {
+    //     console.log(data, '登录成功')
+    //     let script = document.createElement("script");
+    //     script.src = "./main.bundle.js";
+    //     document.getElementById("body").appendChild(script);
+    //   }
+    // });
 
 
     if ('addEventListener' in document) {
