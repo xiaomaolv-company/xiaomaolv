@@ -8,9 +8,15 @@ class MineStore{
   @action
   queryUserData = () => {
     service.get('/queryUserData').then((recorderList) => {
-      this.userData = recorderList
+      console.log(recorderList,'userData')
+      this.setUserData(recorderList)
     })
 
+  }
+
+  @action
+  setUserData = (data) => {
+    this.userData = data
   }
 }
 
