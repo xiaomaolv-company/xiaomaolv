@@ -9,13 +9,11 @@ class Mine extends Component {
 
   render() {
     const {
-      mineStore:{
-        userData
-      }
-    } = this.props
+      userData
+    } = this.props.mineStore
     const avater = userData?userData.avater:null
     const userName = userData?userData.name:null
-    console.log(avater,"ddd")
+    console.log(toJS(userData),"ddd")
     return (
       <div className="Mine">
         <div>
