@@ -100,6 +100,7 @@ module.exports = {
     port: 3000,
     hot: true,
     // hotOnly: true,
+    historyApiFallback: true, // 此属性是解决使用BrowserRouter的时候刷新页面会报cannot GET/ 的错误
     proxy: { // 跨域代理
       '/**': {
         // target: 'http://192.168.1.108:8080/',
