@@ -9,10 +9,14 @@ class Mine extends Component {
 
   render() {
     const {
-      userData
+      userData,
+      loginUserInfo
     } = this.props.mineStore
     const avater = userData?userData.avater:null
     const userName = userData?userData.name:null
+    const continueLoginDays = loginUserInfo?loginUserInfo.loginDays:0
+    const totalAccountNums = loginUserInfo?loginUserInfo.totalAccountNums:0
+    const totalAccountDays = loginUserInfo?loginUserInfo.totalAccountDays:0
     console.log(toJS(userData),"ddd")
     return (
       <div className="Mine">
@@ -25,15 +29,15 @@ class Mine extends Component {
           </div>
           <div className="recorder_list">
             <div className="recorder_item">
-              <p className="recorder_item_num">0</p>
+              <p className="recorder_item_num">{continueLoginDays}</p>
               <p className="recorder_item_text">已连续打卡</p>
             </div>
             <div className="recorder_item">
-              <p className="recorder_item_num">24</p>
+              <p className="recorder_item_num">{totalAccountDays}</p>
               <p className="recorder_item_text">总记账天数</p>
             </div>
             <div className="recorder_item">
-              <p className="recorder_item_num">4</p>
+              <p className="recorder_item_num">{totalAccountNums}</p>
               <p className="recorder_item_text">总记账笔数</p>
             </div>
           </div>
@@ -46,9 +50,11 @@ class Mine extends Component {
 
   componentDidMount() {
     const {
-      queryUserData
+      queryUserData,
+      getUserLoginInfo
     } = this.props.mineStore;
     queryUserData()
+    getUserLoginInfo()
   }
 }
 
