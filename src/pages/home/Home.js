@@ -73,7 +73,6 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    console.log($("#aaa"),'胡思思与')
     const {
       homeStore: {getMenu},
     } = this.props;

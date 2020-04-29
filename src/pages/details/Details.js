@@ -7,6 +7,8 @@ import {PullToRefresh, ListView, DatePicker, List} from "antd-mobile";
 import {fromJS} from "immutable";
 import moment from "moment";
 import * as colors from "@utils/colors";
+import io from 'socket.io-client';
+import * as urlConfig from '../../utils/urlConfig';
 
 @inject("detailsStore")
 @observer
@@ -18,7 +20,7 @@ class Details extends Component {
       listViewHeight: 0,
       datePickerVisible: false,
       dateValue: ''
-    }
+    };
   }
 
   /**
@@ -209,7 +211,8 @@ class Details extends Component {
     } = this.props;
     queryCostList();
     const listViewHeight = document.documentElement.clientHeight - ReactDOM.findDOMNode(this.listView).parentNode.offsetTop;
-    this.setState({listViewHeight: listViewHeight - 130})
+    this.setState({listViewHeight: listViewHeight - 130});
+
   }
 
 }

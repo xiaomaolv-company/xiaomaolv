@@ -78,7 +78,7 @@ module.exports = {
     main: './src/app/app.js',
   },
   output: {
-    filename: "[name].[chunkhash:8].js",
+    filename: "[name].bundle.js",
     path: path.resolve(__dirname, '../dist'),
     publicPath: "./", //  打包出来的index.html文件中的script标签上引入bundle.js文件路径上面会添加一个/
   },
